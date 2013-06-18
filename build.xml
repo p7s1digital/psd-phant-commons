@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="psd-verticals-development" default="build" basedir=".">
+<project name="psd-phant-commons" default="build" basedir=".">
     <!-- once defined properties are not overridden, so the order is essential -->
     <property file="${basedir}/config/default.properties" />
 
