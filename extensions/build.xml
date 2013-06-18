@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build targets for deploy, a tar file is generated. -->
+
+<project name="build" basedir=".">
+
+    <target name="prepare" description="Create a tar file of project files">
+        <mkdir dir="${project.dir.root}/build"/>
+    </target>
+
+    <target name="clean" description="Create a tar file of project files">
+        <delete dir="${project.dir.root}/build" />
+    </target>
+
+</project>

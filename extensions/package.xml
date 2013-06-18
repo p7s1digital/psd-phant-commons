@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build targets for deploy, a tar file is generated. -->
+
+<project name="package" basedir=".">
+
+    <target name="prepare">
+        <mkdir dir="${project.dir.build}/package" />
+    </target>
+
+    <target name="create" description="Create a tar file of project files">
+
+        <tempfile property="tempdir" destdir="${project.dir.temp}" suffix="/" prefix="/package/${project.name}-" createfile="false" />
+        <mkdir dir="${tempdir}"/>
+
+        <copy todir="${tempdir}">
+            <fileset dir="${project.dir.root}" />
+        </copy>
+        <exec dir="${tempdir}" executable="find" failonerror="true">
+            <arg value="." />
+            <arg line=" -name .git -exec rm -rf {} \ ;" />
+        </exec>
+        <delete includeEmptyDirs="true">
+            <fileset dir="${tempdir}/app/cache" includes="**/*" defaultexcludes="no"/>
+            <fileset dir="${tempdir}/app/logs" includes="**/*" defaultexcludes="no"/>
+        </delete>
+
+        <tar destfile="${project.dir.build}/package/${project.name}.tar.gz" compression="gzip" basedir="${tempdir}" longfile="gnu" />
+
+        <delete dir="${tempdir}" />
+    </target>
+
+</project>

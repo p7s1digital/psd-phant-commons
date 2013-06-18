@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="psd-verticals-development" default="build" basedir=".">
+    <!-- once defined properties are not overridden, so the order is essential -->
+    <property file="${basedir}/config/default.properties" />
+
+    <!-- include common build targets for automated project building -->
+    <import file="${basedir}/extensions/build.xml" />
+    <import file="${basedir}/extensions/package.xml" />
+    <import file="${basedir}/extensions/quality.xml" />
+    <import file="${basedir}/extensions/symfony.xml" />
+    <import file="${basedir}/extensions/test.xml" />
+    <import file="${basedir}/extensions/vendor.xml" />
+
+    <target name="build" depends="
+        build.clean,
+        build.prepare,
+        vendor.composer-install,
+        vendor.install,
+        test.php-lint,
+        test.phpunit
+    "/>
+
+    <target name="build-full" depends="
+        build,
+        vendor.autoload-optimize,
+        package.create
+    " />
+
+    <target name="generate-reports" depends="
+        quality.prepare,
+        quality.phploc-report,
+        quality.pdepend,
+        quality.phpmd-report,
+        quality.phpcs-report,
+        quality.phpcpd-report,
+        quality.phpdoc,
+        quality.phpcb,
+
+        test.prepare,
+        test.phpunit-report-unit
+    "/>
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build targets to manage symfony projects. -->
+
+<project name="symfony" basedir="../../">
+
+    <target name="permissions-fix" description="Fix permissions">
+        <property environment="env"/>
+        <exec executable="setfacl" failonerror="true">
+            <arg line="-Rm d:u:${user.name}:rwX,u:${user.name}:rwx,d:u:www-data:rwX,u:www-data:rwX" />
+            <arg value="${project.dir.root}/app/cache" />
+            <arg value="${project.dir.root}/app/logs" />
+        </exec>
+    </target>
+
+    <target name="cache-clear" description="Clear Cache">
+        <exec dir="${project.dir.root}/app" executable="php" failonerror="true">
+            <arg value="console" />
+            <arg value="cache:clear" />
+            <arg value="--env=dev" />
+        </exec>
+    </target>
+
+</project>

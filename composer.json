@@ -1,0 +1,17 @@
+{
+    "name": "psd/phant-commons",
+    "type": "library",
+    "description": "PSD Ant common scripts for PHP projects",
+    "keywords": [],
+    "homepage": "http://www.prosiebensat1digital.de/",
+    "authors": [
+        {
+            "name": "Dennis Benkert",
+            "email": "dennis.benkert@sensiolabs.de"
+        },
+        {
+            "name": "ProSiebenSat.1 Digital GmbH",
+            "homepage": "http://www.prosiebensat1digital.de/"
+        }
+    ]
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build targets to gather static quality statistics of the project. -->
+
+<project name="quality" basedir=".">
+
+    <target name="prepare">
+        <mkdir dir="${project.dir.build}/code-browser"/>
+        <mkdir dir="${project.dir.build}/logs"/>
+        <mkdir dir="${project.dir.build}/pdepend"/>
+        <mkdir dir="${project.dir.build}/phpdoc"/>
+    </target>
+
+    <target name="phpdoc" description="Generate API documentation using PHPDocumentor">
+        <exec executable="phpdoc">
+            <arg line="run -d ${project.dir.root}/src -t ${project.dir.build}/phpdoc -q" />
+        </exec>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="phploc">
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="phploc-report" description="Measure project size using PHPLOC">
+        <exec executable="phploc">
+            <arg value="--log-csv"/>
+            <arg value="${project.dir.build}/logs/phploc.csv"/>
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="pdepend"
+            description="Calculate software metrics using PHP_Depend">
+        <exec executable="pdepend">
+            <arg value="--jdepend-xml=${project.dir.build}/logs/jdepend.xml"/>
+            <arg value="--jdepend-chart=${project.dir.build}/pdepend/dependencies.svg"/>
+            <arg value="--overview-pyramid=${project.dir.build}/pdepend/overview-pyramid.svg"/>
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpmd"
+            description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="phpmd">
+            <arg path="${project.dir.root}/src"/>
+            <arg value="text"/>
+            <arg value="${project.dir.root}/setup/phpmd.xml"/>
+        </exec>
+    </target>
+
+    <target name="phpmd-report"
+            description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+        <exec executable="phpmd">
+            <arg path="${project.dir.root}/src"/>
+            <arg value="xml"/>
+            <arg value="${project.dir.root}/setup/phpmd.xml"/>
+            <arg value="--reportfile"/>
+            <arg value="${project.dir.build}/logs/pmd.xml"/>
+        </exec>
+    </target>
+
+    <target name="phpcs"
+            description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="phpcs">
+            <arg value="--standard=${project.dir.root}/setup/phpcs.xml"/>
+            <arg value="--extensions=php,inc,lib"/>
+            <arg value="--ignore=*.js"/>
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpcs-report"
+            description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+        <exec executable="phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${project.dir.build}/logs/checkstyle.xml"/>
+            <arg value="--standard=${project.dir.root}/setup/phpcs.xml"/>
+            <arg value="--ignore=*.js"/>
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec executable="phpcpd">
+            <arg value="--log-pmd"/>
+            <arg value="${project.dir.build}/logs/pmd-cpd.xml"/>
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpcpd-report" description="Find duplicate code using PHPCPD">
+        <exec executable="phpcpd">
+            <arg value="--log-pmd"/>
+            <arg value="${project.dir.build}/logs/pmd-cpd.xml"/>
+            <arg path="${project.dir.root}/src"/>
+        </exec>
+    </target>
+
+    <target name="phpcb"
+            description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="phpcb">
+            <arg value="--log"/>
+            <arg path="${project.dir.build}/logs"/>
+            <arg value="--source"/>
+            <arg path="${project.dir.root}/src"/>
+            <arg value="--output"/>
+            <arg path="${project.dir.build}/code-browser"/>
+        </exec>
+    </target>
+
+</project>

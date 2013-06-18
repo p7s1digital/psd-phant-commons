@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build targets to manage vendor libraries of the project. -->
+
+<project name="vendor" basedir=".">
+
+    <target name="install" description="Install vendors">
+        <exec executable="php" failonerror="true">
+            <arg value="composer.phar" />
+            <arg value="install" />
+            <arg value="--no-interaction" />
+        </exec>
+    </target>
+
+    <target name="install-dist" description="Install vendors preferred dist">
+        <exec executable="php" failonerror="true">
+            <arg value="composer.phar" />
+            <arg value="install" />
+            <arg value="--prefer-dist" />
+        </exec>
+    </target>
+
+    <target name="autoload-optimize" description="Generates autoload class map for all vendor files">
+        <exec executable="php" failonerror="true">
+            <arg value="composer.phar" />
+            <arg value="dump-autoload" />
+            <arg value="--optimize" />
+        </exec>
+    </target>
+
+    <target name="composer-install" description="Install composer">
+        <exec executable="bash">
+            <arg value="-c"/>
+            <arg value="curl -s https://getcomposer.org/installer | php"/>
+        </exec>
+    </target>
+
+</project>
