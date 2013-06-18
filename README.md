@@ -31,10 +31,10 @@
     </project>
     ```
 
-3. Add a properties file to your project based on the one under (config/default.properties) in the folder `setup/config/`
+3. Add a properties file to your project based on the one under [config/default.properties](config/default.properties) in the folder `setup/config/`
 
-4. Add a configuration files for [PHPMD](http://phpmd.org/) based on the one under (config/phpmd.xml) in the folder `setup/phpmd.xml`
+4. Add a configuration files for [PHPMD](http://phpmd.org/) based on the one under [config/phpmd.xml](config/phpmd.xml) in the folder `setup/phpmd.xml`
 
-5. Add a configuration files for [PHP_CodeSniffer](http://pear.php.net/package/PHP_CodeSniffer) based on the one under (config/phpcs.xml) in the folder `setup/phpcs.xml`
+5. Add a configuration files for [PHP_CodeSniffer](http://pear.php.net/package/PHP_CodeSniffer) based on the one under [config/phpcs.xml](config/phpcs.xml) in the folder `setup/phpcs.xml`
 
 6. Run the command `ant build` in your project root
