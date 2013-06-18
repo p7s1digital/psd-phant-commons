@@ -2,15 +2,15 @@
 
 <project name="psd-phant-commons" default="build" basedir=".">
     <!-- once defined properties are not overridden, so the order is essential -->
-    <property file="${basedir}/config/default.properties" />
+    <property file="config/default.properties" />
 
     <!-- include common build targets for automated project building -->
-    <import file="${basedir}/extensions/build.xml" />
-    <import file="${basedir}/extensions/package.xml" />
-    <import file="${basedir}/extensions/quality.xml" />
-    <import file="${basedir}/extensions/symfony.xml" />
-    <import file="${basedir}/extensions/test.xml" />
-    <import file="${basedir}/extensions/vendor.xml" />
+    <import file="extensions/build.xml" />
+    <import file="extensions/package.xml" />
+    <import file="extensions/quality.xml" />
+    <import file="extensions/symfony.xml" />
+    <import file="extensions/test.xml" />
+    <import file="extensions/vendor.xml" />
 
     <target name="build" depends="
         build.clean,
