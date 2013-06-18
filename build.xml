@@ -15,8 +15,6 @@
     <target name="build" depends="
         build.clean,
         build.prepare,
-        vendor.composer-install,
-        vendor.install,
         test.php-lint,
         test.phpunit
     "/>

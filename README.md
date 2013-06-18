@@ -21,12 +21,24 @@
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
 
-    <project name="psd-verticals-development" default="build" basedir=".">
+    <project name="your-project" basedir=".">
         <!-- once defined properties are not overridden, so the order is essential -->
-        <property file="${basedir}/setup/config/default.properties" />
+        <property file="${basedir}/setup/default.properties" />
+
+        <target name="install">
+            <exec executable="bash">
+                <arg value="-c"/>
+                <arg value="curl -s https://getcomposer.org/installer | php"/>
+            </exec>
+            <exec executable="php" failonerror="true">
+                <arg value="composer.phar" />
+                <arg value="install" />
+                <arg value="--no-interaction" />
+            </exec>
+        </target>
 
         <!-- include common build targets for automated project building -->
-        <import file="${project.dir.root}/vendor/psd/phant-commons/build.xml" />
+        <import file="${project.dir.root}/vendor/psd/phant-commons/build.xml" optional="true" />
 
     </project>
     ```
@@ -37,4 +49,6 @@
 
 5. Add a configuration files for [PHP_CodeSniffer](http://pear.php.net/package/PHP_CodeSniffer) based on the one under [config/phpcs.xml](config/phpcs.xml) in the folder `setup/phpcs.xml`
 
-6. Run the command `ant build` in your project root
+6. Run the command `ant install` in your project root
+
+7. Run the command `ant build` in your project root
