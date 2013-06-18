@@ -4,11 +4,11 @@
 <project name="build" basedir=".">
 
     <target name="prepare" description="Create a tar file of project files">
-        <mkdir dir="${project.dir.root}/build"/>
+        <mkdir dir="${project.dir.build}"/>
     </target>
 
     <target name="clean" description="Create a tar file of project files">
-        <delete dir="${project.dir.root}/build" />
+        <delete dir="${project.dir.build}" />
     </target>
 
 </project>
