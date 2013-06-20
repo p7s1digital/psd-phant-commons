@@ -16,10 +16,9 @@
             <fileset dir="${project.dir.root}" />
         </copy>
         <exec dir="${tempdir}" executable="find" failonerror="true">
-            <arg value="." />
-            <arg line=" -name .git -exec rm -rf {} \ ;" />
+            <arg line=". -depth -name .git -exec rm -rf {} \ ;" />
         </exec>
-        <delete includeEmptyDirs="true">
+        <delete includeEmptyDirs="true" failonerror="false">
             <fileset dir="${tempdir}/app/cache" includes="**/*" defaultexcludes="no"/>
             <fileset dir="${tempdir}/app/logs" includes="**/*" defaultexcludes="no"/>
         </delete>
