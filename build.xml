@@ -33,7 +33,6 @@
         quality.phpmd-report,
         quality.phpcs-report,
         quality.phpcpd-report,
-        quality.phpdoc,
         quality.phpcb,
 
         test.prepare,
