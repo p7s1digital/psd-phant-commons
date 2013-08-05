@@ -21,6 +21,9 @@
         <delete includeEmptyDirs="true" failonerror="false">
             <fileset dir="${tempdir}/app/cache" includes="**/*" defaultexcludes="no"/>
             <fileset dir="${tempdir}/app/logs" includes="**/*" defaultexcludes="no"/>
+            <fileset dir="${tempdir}/.idea" defaultexcludes="no"/>
+            <fileset dir="${tempdir}/.vagrant" defaultexcludes="no"/>
+            <fileset file="${tempdir}/composer.phar" defaultexcludes="no"/>
         </delete>
 
         <tar destfile="${project.dir.build}/package/${project.name}.tar.gz" compression="gzip" basedir="${tempdir}" longfile="gnu" />
