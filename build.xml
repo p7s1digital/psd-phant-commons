@@ -4,6 +4,8 @@
     <!-- once defined properties are not overridden, so the order is essential -->
     <property file="config/default.properties" />
 
+    <property name="psd-phant-commons.available" value="1"/>
+
     <!-- include common build targets for automated project building -->
     <import file="extensions/build.xml" />
     <import file="extensions/package.xml" />
