@@ -26,7 +26,7 @@
             <fileset file="${tempdir}/composer.phar" defaultexcludes="no"/>
         </delete>
 
-        <tar destfile="${project.dir.build}/package/${project.name}.tar.gz" compression="gzip" basedir="${tempdir}" longfile="gnu" />
+        <tar destfile="${project.dir.build}/package/${project.name}${project.version}.tar.gz" compression="gzip" basedir="${tempdir}" longfile="gnu" />
 
         <delete dir="${tempdir}" />
     </target>
