@@ -20,4 +20,12 @@
         </exec>
     </target>
 
+    <target name="assets-install" description="Install Assets">
+        <exec dir="${project.dir.root}/app" executable="php" failonerror="true">
+            <arg value="console" />
+            <arg value="assets:install" />
+            <arg value="${project.dir.root}/web" />
+        </exec>
+    </target>
+
 </project>
